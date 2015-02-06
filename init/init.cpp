@@ -1009,9 +1009,9 @@ int main(int argc, char** argv) {
         mount("tmpfs", "/dev", "tmpfs", MS_NOSUID, "mode=0755");
         mkdir("/dev/pts", 0755);
         mkdir("/dev/socket", 0755);
-        mount("devpts", "/dev/pts", "devpts", 0, NULL);
-        mount("proc", "/proc", "proc", 0, NULL);
-        mount("sysfs", "/sys", "sysfs", 0, NULL);
+        mount("devpts", "/dev/pts", "devpts", MS_NOSUID|MS_NOEXEC, NULL);
+        mount("proc", "/proc", "proc", MS_NOSUID|MS_NODEV|MS_NOEXEC, NULL);
+        mount("sysfs", "/sys", "sysfs", MS_NOSUID|MS_NODEV|MS_NOEXEC, NULL);
     }
 
     // We must have some place other than / to create the device nodes for
