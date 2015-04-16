@@ -267,7 +267,7 @@ int adb_main(int is_daemon, int server_port)
     */
     gid_t groups[] = { AID_ADB, AID_LOG, AID_INPUT, AID_INET, AID_NET_BT,
                        AID_NET_BT_ADMIN, AID_SDCARD_R, AID_SDCARD_RW,
-                       AID_NET_BW_STATS };
+                       AID_NET_BW_STATS, AID_PROC };
     if (setgroups(sizeof(groups)/sizeof(groups[0]), groups) != 0) {
         exit(1);
     }
