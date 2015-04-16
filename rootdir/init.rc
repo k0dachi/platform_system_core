@@ -575,6 +575,7 @@ service ueventd /sbin/ueventd
 
 service logd /system/bin/logd
     class core
+    group root proc
     socket logd stream 0666 logd logd
     socket logdr seqpacket 0666 logd logd
     socket logdw dgram 0222 logd logd
@@ -597,7 +598,7 @@ service console /system/bin/sh
     console
     disabled
     user shell
-    group shell log
+    group shell log proc
     seclabel u:r:shell:s0
 
 on property:ro.debuggable=1
@@ -616,6 +617,7 @@ on property:ro.kernel.qemu=1
 
 service lmkd /system/bin/lmkd
     class core
+    group root proc
     critical
     socket lmkd seqpacket 0660 system system
     writepid /dev/cpuset/system-background/tasks
@@ -623,7 +625,7 @@ service lmkd /system/bin/lmkd
 service servicemanager /system/bin/servicemanager
     class core
     user system
-    group system
+    group system proc
     critical
     onrestart restart healthd
     onrestart restart zygote
@@ -649,10 +651,12 @@ service netd /system/bin/netd
 service debuggerd /system/bin/debuggerd
     class main
     writepid /dev/cpuset/system-background/tasks
+    group root proc
 
 service debuggerd64 /system/bin/debuggerd64
     class main
     writepid /dev/cpuset/system-background/tasks
+    group root proc
 
 service ril-daemon /system/bin/rild
     class main
@@ -732,7 +736,7 @@ service mtpd /system/bin/mtpd
 service keystore /system/bin/keystore /data/misc/keystore
     class main
     user keystore
-    group keystore drmrpc
+    group keystore drmrpc proc
 
 service dumpstate /system/bin/dumpstate -s
     class main

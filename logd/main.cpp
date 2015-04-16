@@ -103,7 +103,9 @@ static int drop_privs() {
         return -1;
     }
 
-    if (setgroups(0, NULL) == -1) {
+    gid_t groups[] = { AID_PROC };
+
+    if (setgroups(sizeof(groups) / sizeof(groups[0]), groups) == -1) {
         return -1;
     }
 
