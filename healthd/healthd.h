@@ -86,7 +86,7 @@ struct healthd_mode_ops {
     void (*battery_update)(struct android::BatteryProperties *props);
 };
 
-extern struct healthd_mode_ops *healthd_mode_ops;
+extern const struct healthd_mode_ops *healthd_mode_ops;
 
 // Charger mode
 
