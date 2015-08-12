@@ -153,7 +153,7 @@ err:
     return ret;
 }
 
-struct autosuspend_ops autosuspend_earlysuspend_ops = {
+static const struct autosuspend_ops autosuspend_earlysuspend_ops = {
         .enable = autosuspend_earlysuspend_enable,
         .disable = autosuspend_earlysuspend_disable,
 };
@@ -186,7 +186,7 @@ void start_earlysuspend_thread(void)
     wait_for_earlysuspend = true;
 }
 
-struct autosuspend_ops *autosuspend_earlysuspend_init(void)
+const struct autosuspend_ops *autosuspend_earlysuspend_init(void)
 {
     char buf[80];
     int ret;
