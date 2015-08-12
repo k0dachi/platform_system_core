@@ -77,12 +77,12 @@ err:
     return ret;
 }
 
-struct autosuspend_ops autosuspend_autosleep_ops = {
+static const struct autosuspend_ops autosuspend_autosleep_ops = {
         .enable = autosuspend_autosleep_enable,
         .disable = autosuspend_autosleep_disable,
 };
 
-struct autosuspend_ops *autosuspend_autosleep_init(void)
+const struct autosuspend_ops *autosuspend_autosleep_init(void)
 {
     char buf[80];
 
