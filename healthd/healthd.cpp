@@ -74,7 +74,7 @@ static int wakealarm_wake_interval = DEFAULT_PERIODIC_CHORES_INTERVAL_FAST;
 
 static BatteryMonitor* gBatteryMonitor;
 
-struct healthd_mode_ops *healthd_mode_ops;
+const struct healthd_mode_ops *healthd_mode_ops;
 
 // Android mode
 
@@ -99,21 +99,21 @@ static void healthd_mode_nop_heartbeat(void);
 static void healthd_mode_nop_battery_update(
     struct android::BatteryProperties *props);
 
-static struct healthd_mode_ops android_ops = {
+static const struct healthd_mode_ops android_ops = {
     .init = healthd_mode_android_init,
     .preparetowait = healthd_mode_android_preparetowait,
     .heartbeat = healthd_mode_nop_heartbeat,
     .battery_update = healthd_mode_android_battery_update,
 };
 
-static struct healthd_mode_ops charger_ops = {
+static const struct healthd_mode_ops charger_ops = {
     .init = healthd_mode_charger_init,
     .preparetowait = healthd_mode_charger_preparetowait,
     .heartbeat = healthd_mode_charger_heartbeat,
     .battery_update = healthd_mode_charger_battery_update,
 };
 
-static struct healthd_mode_ops recovery_ops = {
+static const struct healthd_mode_ops recovery_ops = {
     .init = healthd_mode_nop_init,
     .preparetowait = healthd_mode_nop_preparetowait,
     .heartbeat = healthd_mode_nop_heartbeat,
