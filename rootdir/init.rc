@@ -435,6 +435,9 @@ on boot
     chown root system /sys/module/lowmemorykiller/parameters/minfree
     chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
 
+    # OpenBSD malloc is quite heavy on VMAs
+    write /proc/sys/vm/max_map_count 262144
+
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_background_ratio  5
