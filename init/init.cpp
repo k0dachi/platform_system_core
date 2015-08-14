@@ -459,7 +459,7 @@ void property_changed(const char *name, const char *value)
 
 static void restart_service_if_needed(struct service *svc)
 {
-    time_t next_start_time = svc->time_started + 5;
+    time_t next_start_time = svc->time_started + 10;
 
     if (next_start_time <= gettime()) {
         svc->flags &= (~SVC_RESTARTING);
