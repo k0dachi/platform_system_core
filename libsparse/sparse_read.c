@@ -50,6 +50,7 @@ static char *copybuf;
 #define min(a, b) \
 	({ typeof(a) _a = (a); typeof(b) _b = (b); (_a < _b) ? _a : _b; })
 
+__attribute__((format(printf, 3, 4)))
 static void verbose_error(bool verbose, int err, const char *fmt, ...)
 {
 	char *s = "";

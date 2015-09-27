@@ -60,8 +60,9 @@ public:
 
     static inline const String8 empty();
 
-    static String8              format(const char* fmt, ...) __attribute__((format (printf, 1, 2)));
-    static String8              formatV(const char* fmt, va_list args);
+    static String8              format(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
+    static String8              formatV(const char* fmt, va_list args)
+        __attribute__((format(printf, 1, 0)));
 
     inline  const char*         string() const;
     inline  size_t              size() const;
@@ -85,8 +86,9 @@ public:
             status_t            append(const char* other, size_t numChars);
 
             status_t            appendFormat(const char* fmt, ...)
-                    __attribute__((format (printf, 2, 3)));
-            status_t            appendFormatV(const char* fmt, va_list args);
+                    __attribute__((format(printf, 2, 3)));
+            status_t            appendFormatV(const char* fmt, va_list args)
+                    __attribute__((format(printf, 2, 0)));
 
             // Note that this function takes O(N) time to calculate the value.
             // No cache value is stored.
