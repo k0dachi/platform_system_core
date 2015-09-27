@@ -276,6 +276,7 @@ void sparse_file_verbose(struct sparse_file *s);
  * sparse_print_verbose may be overridden to log verbose errors somewhere else.
  *
  */
+__attribute__((format(printf, 1, 2)))
 extern void (*sparse_print_verbose)(const char *fmt, ...);
 
 #ifdef	__cplusplus
