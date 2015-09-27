@@ -50,7 +50,7 @@ enum AdbTrace {
  */
 
 /* Delivers a trace message to the emulator via QEMU pipe. */
-void adb_qemu_trace(const char* fmt, ...);
+void adb_qemu_trace(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
 /* Macro to use to send ADB trace messages to the emulator. */
 #define DQ(...)    adb_qemu_trace(__VA_ARGS__)
 #else

@@ -20,7 +20,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void sparse_default_print(const char *fmt, ...)
+__attribute__((format(printf, 1, 2)))
+static void sparse_default_print(const char *fmt, ...)
 {
 	va_list argp;
 
@@ -29,5 +30,4 @@ void sparse_default_print(const char *fmt, ...)
 	va_end(argp);
 }
 
-void (*sparse_print_error)(const char *fmt, ...) = sparse_default_print;
 void (*sparse_print_verbose)(const char *fmt, ...) = sparse_default_print;
