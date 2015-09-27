@@ -57,7 +57,7 @@
 
 static int ifc_ctl_sock = -1;
 static int ifc_ctl_sock6 = -1;
-void printerr(char *fmt, ...);
+void printerr(char *fmt, ...) __attribute__((format(printf, 1, 2)));
 
 #define DBG 0
 #define INET_ADDRLEN 4

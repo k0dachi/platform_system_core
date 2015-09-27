@@ -35,6 +35,7 @@ struct parse_state
 
 void dump_parser_state(void);
 int next_token(struct parse_state *state);
-void parse_error(struct parse_state *state, const char *fmt, ...);
+void parse_error(struct parse_state *state, const char *fmt, ...)
+    __attribute__((format(printf, 2, 3)));
 
 #endif /* PARSER_H_ */
