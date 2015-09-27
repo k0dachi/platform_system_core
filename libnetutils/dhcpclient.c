@@ -62,7 +62,7 @@ msecs_t get_msecs(void)
     }
 }
 
-void printerr(char *fmt, ...)
+__attribute__((format(printf, 1, 2))) void printerr(char *fmt, ...)
 {
     va_list ap;
 
