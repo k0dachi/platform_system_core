@@ -41,6 +41,18 @@ static bool str_eq(void *key_a, void *key_b)
     return !strcmp((const char *)key_a, (const char *)key_b);
 }
 
+#ifdef __clang__
+static uint32_t u32add(uint32_t a, uint32_t b) {
+    uint32_t c;
+    __builtin_uadd_overflow(a, b, &c);
+    return c;
+}
+#else
+static uint32_t u32add(uint32_t a, uint32_t b) {
+    return a + b;
+}
+#endif
+
 /* use djb hash unless we find it inadequate */
 static int str_hash_fn(void *str)
 {
@@ -48,7 +60,7 @@ static int str_hash_fn(void *str)
     char *p;
 
     for (p = str; p && *p; p++)
-        hash = ((hash << 5) + hash) + *p;
+        hash = u32add((u32add((hash << 5), hash)), *p);
     return (int)hash;
 }
 

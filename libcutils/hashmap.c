@@ -74,6 +74,30 @@ Hashmap* hashmapCreate(size_t initialCapacity,
     return map;
 }
 
+#ifdef __clang__
+static int sadd(int a, int b) {
+    int c;
+    __builtin_sadd_overflow(a, b, &c);
+    return c;
+}
+#else
+static int sadd(int a, int b) {
+    return a + b;
+}
+#endif
+
+#ifdef __clang__
+static int smul(int a, int b) {
+    int c;
+    __builtin_smul_overflow(a, b, &c);
+    return c;
+}
+#else
+static int smul(int a, int b) {
+    return a * b;
+}
+#endif
+
 /**
  * Hashes the given key.
  */
@@ -82,9 +106,9 @@ static inline int hashKey(Hashmap* map, void* key) {
 
     // We apply this secondary hashing discovered by Doug Lea to defend
     // against bad hashes.
-    h += ~(h << 9);
+    h = sadd(h, ~(((unsigned) h) << 9));
     h ^= (((unsigned int) h) >> 14);
-    h += (h << 4);
+    h = sadd(h, ((unsigned) h) << 4);
     h ^= (((unsigned int) h) >> 10);
        
     return h;
@@ -157,7 +181,7 @@ int hashmapHash(void* key, size_t keySize) {
     char* data = (char*) key;
     size_t i;
     for (i = 0; i < keySize; i++) {
-        h = h * 31 + *data;
+        h = sadd(smul(h, 32), *data);
         data++;
     }
     return h;
