@@ -24,13 +24,16 @@
 
 namespace android {
 
-#ifdef __clang__
-__attribute__((no_sanitize("integer")))
-#endif
 hash_t JenkinsHashWhiten(uint32_t hash) {
+#ifdef __clang__
+    __builtin_uadd_overflow(hash, (hash << 3), &hash);
+    hash ^= (hash >> 11);
+    __builtin_uadd_overflow(hash, (hash << 15), &hash);
+#else
     hash += (hash << 3);
     hash ^= (hash >> 11);
     hash += (hash << 15);
+#endif
     return hash;
 }
 

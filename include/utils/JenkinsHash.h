@@ -29,12 +29,14 @@ namespace android {
 /* The Jenkins hash of a sequence of 32 bit words A, B, C is:
  * Whiten(Mix(Mix(Mix(0, A), B), C)) */
 
-#ifdef __clang__
-__attribute__((no_sanitize("integer")))
-#endif
 inline uint32_t JenkinsHashMix(uint32_t hash, uint32_t data) {
+#ifdef __clang__
+    __builtin_uadd_overflow(hash, data, &hash);
+    __builtin_uadd_overflow(hash, (hash << 10), &hash);
+#else
     hash += data;
     hash += (hash << 10);
+#endif
     hash ^= (hash >> 6);
     return hash;
 }
