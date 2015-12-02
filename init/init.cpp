@@ -1013,7 +1013,9 @@ int main(int argc, char** argv) {
         mkdir("/dev/pts", 0755);
         mkdir("/dev/socket", 0755);
         mount("devpts", "/dev/pts", "devpts", MS_NOSUID|MS_NOEXEC, NULL);
-        mount("proc", "/proc", "proc", MS_NOSUID|MS_NODEV|MS_NOEXEC, NULL);
+        #define MAKE_STR(x) __STRING(x)
+        mount("proc", "/proc", "proc", MS_NOSUID|MS_NODEV|MS_NOEXEC,
+              "hidepid=2,gid=" MAKE_STR(AID_PROC));
         mount("sysfs", "/sys", "sysfs", MS_NOSUID|MS_NODEV|MS_NOEXEC, NULL);
     }
 
