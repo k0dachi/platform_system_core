@@ -95,7 +95,7 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_MODULE:= libutils
 LOCAL_C_INCLUDES += external/safe-iop/include
 LOCAL_CLANG := true
-LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer -fsanitize-undefined-trap-on-error
+LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer,object-size -fsanitize-undefined-trap-on-error
 include $(BUILD_STATIC_LIBRARY)
 
 # For the device, shared
@@ -112,7 +112,7 @@ LOCAL_CFLAGS := -Werror
 LOCAL_C_INCLUDES += external/safe-iop/include
 
 LOCAL_CLANG := true
-LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer -fsanitize-undefined-trap-on-error
+LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer,object-size -fsanitize-undefined-trap-on-error
 include $(BUILD_SHARED_LIBRARY)
 
 # Include subdirectory makefiles
@@ -124,7 +124,7 @@ LOCAL_STATIC_LIBRARIES := libutils libcutils
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_SRC_FILES := SharedBufferTest.cpp
 LOCAL_CLANG := true
-LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer -fsanitize-undefined-trap-on-error
+LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer,object-size -fsanitize-undefined-trap-on-error
 include $(BUILD_NATIVE_TEST)
 
 include $(CLEAR_VARS)
