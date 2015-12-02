@@ -130,7 +130,7 @@ LOCAL_CFLAGS += -DUSE_CPUSETS
 endif
 LOCAL_CFLAGS += -Werror -std=gnu90
 LOCAL_CLANG := true
-LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer -fsanitize-undefined-trap-on-error
+LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer,object-size -fsanitize-undefined-trap-on-error
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -145,7 +145,7 @@ endif
 LOCAL_CFLAGS += -Werror
 LOCAL_C_INCLUDES := $(libcutils_c_includes)
 LOCAL_CLANG := true
-LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer -fsanitize-undefined-trap-on-error
+LOCAL_CFLAGS += -fno-wrapv -fsanitize=integer,object-size -fsanitize-undefined-trap-on-error
 include $(BUILD_SHARED_LIBRARY)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
